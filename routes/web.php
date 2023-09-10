@@ -27,6 +27,10 @@ Route::get('profile/image/update', [App\Http\Controllers\ProfileImageController:
 
 Route::get('/profile/{id}', [App\Http\Controllers\ProfileController::class, 'index'])->name('profile');
 
+Route::get('/post/create', [App\Http\Controllers\PostController::class, 'create'])->name('post.create');
+
+Route::post('/post/store', [App\Http\Controllers\PostController::class, 'store'])->name('post.store');
+
 Route::post('profile/update', [App\Http\Controllers\ProfileController::class, 'update'])->name('profile.update');
 
 Route::post('profile/image/store', [App\Http\Controllers\ProfileImageController::class, 'store'])->name('profile.image.store');

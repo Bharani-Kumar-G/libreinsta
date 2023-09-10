@@ -61,7 +61,9 @@
             alert("Sorry, FileReader API not supported")
           }
         },
-        cropImage() {
+        cropImage(e) {
+          e.preventDefault();
+          
           // Get image data for post processing, e.g. upload or setting image src
           this.croppedImageSrc = this.$refs.cropper.getCroppedCanvas().toDataURL()
           this.$data.value = this.$refs.cropper.getCroppedCanvas().toDataURL()
