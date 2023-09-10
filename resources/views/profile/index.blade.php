@@ -21,8 +21,15 @@
             </div>
 
         </div>
-        <div>
-
+        <div class="mt-5">
+            <div>
+                <span class="ms-5" style="float: right">
+                    <a href="{{ route('post.create') }}">Add Post</a>
+                </span>
+            </div>
+            @foreach ($user->post as $post)
+                <img class="ms-5 mb-5" style="width: 250px" src="{{ $post->image }}" alt="">
+            @endforeach
         </div>
     </div>
 </div>
