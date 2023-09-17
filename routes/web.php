@@ -23,6 +23,9 @@ Route::get('/', function () {
 Auth::routes();
 
 
+Route::get('/followings', [FollowsController::class, 'index']);
+
+Route::get('/followers', [FollowsController::class, 'followers']);
 
 Route::get('/profile', [ProfileController::class, 'profile'])->name('home');
 
@@ -33,6 +36,8 @@ Route::get('profile/image/update', [ProfileImageController::class, 'update'])->n
 Route::get('/profile/{user}', [ProfileController::class, 'index'])->name('profile');
 
 Route::get('/post/create', [PostController::class, 'create'])->name('post.create');
+
+
 
 Route::post('/follow/{profile}', [FollowsController::class, 'store']);
 
