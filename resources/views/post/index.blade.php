@@ -8,6 +8,7 @@
                 <div class="card-header">{{ __('Post') }}</div>
 
                 <div class="card-body">
+                    
                     <div class="row">
                         <div class="col-3">
                             <img style="width: 400px;" src="{{ asset($post->image) }}" alt="post">

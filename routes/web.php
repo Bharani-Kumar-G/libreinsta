@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProfileImageController;
+use App\Http\Controllers\FollowsController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -21,15 +22,19 @@ Route::get('/', function () {
 
 Auth::routes();
 
+
+
 Route::get('/profile', [ProfileController::class, 'profile'])->name('home');
 
 Route::get('profile/edit', [ProfileController::class, 'edit'])->name('profile.edit');
 
 Route::get('profile/image/update', [ProfileImageController::class, 'update'])->name('profile.image.update');
 
-Route::get('/profile/{id}', [ProfileController::class, 'index'])->name('profile');
+Route::get('/profile/{user}', [ProfileController::class, 'index'])->name('profile');
 
 Route::get('/post/create', [PostController::class, 'create'])->name('post.create');
+
+Route::post('/follow/{profile}', [FollowsController::class, 'store']);
 
 Route::get('post/index/{post}', [PostController::class, 'index'])->name('post.index');
 
