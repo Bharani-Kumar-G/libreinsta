@@ -44,7 +44,27 @@ class ProfileController extends Controller
 
     public function index(User $user){
         $follows = (auth()->check()) ? auth()->user()->followings->contains($user->profile->id) : false;
-        return view('profile.index')->with(['user' => $user,'follows'=>$follows]);
+        $postCount = Cache::remember(
+            'count.posts.' . $user->id,
+            now()->addSeconds(30),
+            function () use ($user) {
+                return $user->posts->count();
+            });
+
+        $followersCount = Cache::remember(
+            'count.followers.' . $user->id,
+            now()->addSeconds(30),
+            function () use ($user) {
+                return $user->profile->followers->count();
+            });
+
+        $followingCount = Cache::remember(
+            'count.following.' . $user->id,
+            now()->addSeconds(30),
+            function () use ($user) {
+                return $user->followings->count();
+            });
+        return view('profile.index',compact('user','follows', 'postCount', 'followersCount', 'followingCount'));
     }
     
     public function edit(){

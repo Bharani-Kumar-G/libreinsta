@@ -14,6 +14,11 @@
                 <div>{{ $user->profile->title }}</div>
                 <div>{{ $user->profile->bio }}</div>
                 <a href="{{ $user->profile->url }}" style="text-decoration: none"><div>{{ $user->profile->url }}</div></a>
+                <div class="d-flex">
+                    <div class="pr-5"><strong>{{ $postCount }}</strong> posts</div>
+                    <div class="pr-5"><strong>{{ $followersCount }}</strong> followers</div>
+                    <div class="pr-5"><strong>{{ $followingCount }}</strong> following</div>
+                </div>
                 <div>
                     <span class="me-5">
                         <a href="{{ route('profile.edit') }}">Edit Profile</a>
@@ -22,10 +27,10 @@
                         <a href="{{ route('profile.image.update') }}">Edit Profile Image</a>
                     </span>
                     <span class="me-5 mt-5" style="float: right">
-                        <a href="/followings">Followings</a>
+                        <a href="/followings/{{ $user->id }}">Followings</a>
                     </span>
                     <span class="me-5 mt-5" style="float: right">
-                        <a href="/followers">Followers</a>
+                        <a href="/followers/{{ $user->id }}">Followers</a>
                     </span>
                 </div>
                 

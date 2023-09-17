@@ -13,12 +13,12 @@ class FollowsController extends Controller
         $this->middleware('auth');
     }
 
-    public function index(){
-        return view('follows.index')->with(['user'=>auth()->user()]);
+    public function index(User $user){
+        return view('follows.index')->with(['user'=>$user]);
     }
 
-    public function followers(){
-        return view('follows.follower')->with(['user'=>auth()->user()]);
+    public function followers(User $user){
+        return view('follows.follower')->with(['user'=>$user]);
     }
 
     public function store(Profile $profile)
