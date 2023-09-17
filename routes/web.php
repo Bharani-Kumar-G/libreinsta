@@ -1,7 +1,9 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\PostController;
+use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ProfileImageController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -19,18 +21,26 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/profile', [App\Http\Controllers\ProfileController::class, 'profile'])->name('home');
+Route::get('/profile', [ProfileController::class, 'profile'])->name('home');
 
-Route::get('profile/edit', [App\Http\Controllers\ProfileController::class, 'edit'])->name('profile.edit');
+Route::get('profile/edit', [ProfileController::class, 'edit'])->name('profile.edit');
 
-Route::get('profile/image/update', [App\Http\Controllers\ProfileImageController::class, 'update'])->name('profile.image.update');
+Route::get('profile/image/update', [ProfileImageController::class, 'update'])->name('profile.image.update');
 
-Route::get('/profile/{id}', [App\Http\Controllers\ProfileController::class, 'index'])->name('profile');
+Route::get('/profile/{id}', [ProfileController::class, 'index'])->name('profile');
 
-Route::get('/post/create', [App\Http\Controllers\PostController::class, 'create'])->name('post.create');
+Route::get('/post/create', [PostController::class, 'create'])->name('post.create');
 
-Route::post('/post/store', [App\Http\Controllers\PostController::class, 'store'])->name('post.store');
+Route::get('post/index/{post}', [PostController::class, 'index'])->name('post.index');
 
-Route::post('profile/update', [App\Http\Controllers\ProfileController::class, 'update'])->name('profile.update');
+Route::get('/post/edit/{post}', [PostController::class, 'edit'])->name('post.edit');
 
-Route::post('profile/image/store', [App\Http\Controllers\ProfileImageController::class, 'store'])->name('profile.image.store');
+Route::post('/post/store', [PostController::class, 'store'])->name('post.store');
+
+Route::post('/post/update', [PostController::class, 'update'])->name('post.update');
+
+Route::post('profile/update', [ProfileController::class, 'update'])->name('profile.update');
+
+Route::post('profile/image/store', [ProfileImageController::class, 'store'])->name('profile.image.store');
+
+Route::post('post/delete',[PostController::class, 'delete'])->name('post.delete');

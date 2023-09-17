@@ -15,7 +15,8 @@ class Post extends Model
         'caption',
         'image'
     ];
-
+    protected $primaryKey = 'id';
+    protected $table = 'posts';
     public function user(){
         return $this->belongsTo(User::class);
     }

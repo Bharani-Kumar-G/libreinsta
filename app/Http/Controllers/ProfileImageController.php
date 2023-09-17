@@ -30,6 +30,9 @@ class ProfileImageController extends Controller
         $image->save($path);
 
         $profile = Profile::where('user_id', auth()->user()->id)->first();
+        if($profile->image){
+            unlink($profile->image);
+        }
         $profile->image = "storage/images/profile/".$filename;
         $profile->save();
 
