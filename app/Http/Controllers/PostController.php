@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Post;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
 use Intervention\Image\Facades\Image;
 
 class PostController extends Controller
@@ -35,6 +36,11 @@ class PostController extends Controller
         $image = Image::make($base64);
         $image->resize(1200,1200);
         $image->save($path);
+        $folderPath = public_path("/storage/images/post/");
+        if (!File::exists($folderPath)) {
+            // The folder doesn't exist; create it
+            File::makeDirectory($folderPath, 0755, true, true);
+        }
         Post::create([
             'id' => bin2hex(random_bytes(32)),
             'user_id' => auth()->user()->id,
