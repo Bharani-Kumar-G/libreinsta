@@ -23,6 +23,9 @@ app.component('follow-button', FollowButton);
 
 import LikeButton from './components/LikeButton.vue';
 app.component('like-button', LikeButton);
+
+import LikeCommentButton from './components/LikeCommentButton.vue';
+app.component('like-comment-button', LikeCommentButton);
 /**
  * The following block of code may be used to automatically register your
  * Vue components. It will recursively scan this directory for the Vue

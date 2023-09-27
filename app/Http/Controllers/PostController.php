@@ -17,12 +17,26 @@ class PostController extends Controller
     public function index(Post $post){
         $likes = (auth()->check()) ? auth()->user()->liked->contains($post->id): false;
         $follows = (auth()->check()) ? auth()->user()->followings->contains($post->user->profile->id) : false;
-        
-        return view('post.index')->with(['post'=>$post, 'follows'=>$follows, 'likes'=>$likes]);
+        $comments = $post->comments;
+        return view('post.index')->with(['post'=>$post, 'follows'=>$follows, 'likes'=>$likes, 'comments'=> $comments]);
     }
 
     public function edit(Post $post){
         return view('post.edit')->with(['post'=>$post]);
+    }
+
+    public function getLikesCount(Post $post)
+    {
+        $data = $post->likes->count();
+
+        return response()->json(['data' => $data]);
+    }
+
+    public function isLiked(Post $post)
+    {
+        $data = (auth()->check()) ? auth()->user()->liked->contains($post->id): false;
+
+        return response()->json(['data' => $data]);
     }
 
     public function create(){

@@ -6,7 +6,7 @@
 </template>
 <script>
     export default {
-        props: ['postId', 'likes', 'likeCount'],
+        props: ['commentId', 'likes', 'likeCount'],
 
         mounted() {
             console.log('Component mounted.')
@@ -29,7 +29,7 @@
             followUser() {
                 
 
-                axios.post('/like/' + this.postId)
+                axios.post('/comment/like/' + this.commentId)
                     .then(response => {
                         this.isliked = !this.likes;
                         this.fetchLikesCount();
@@ -40,10 +40,13 @@
                         if (errors.response.status == 401) {
                             window.location = '/login';
                         }
+                        if (errors.response.status == 500) {
+                            console.log(errors.response);
+                        }
                     });
             },
             fetchLikesCount() {
-                axios.get('/likes_count/'+this.postId)
+                axios.get('/comment/likes_count/'+this.commentId)
                     .then(response => {
                         this.likescount = response.data.data; // Assuming your data is nested under 'data' key
                     })
@@ -52,7 +55,7 @@
                     });
             },
             fetchIsLiked() {
-                axios.get('/isliked/'+this.postId)
+                axios.get('/comment/isliked/'+this.commentId)
                     .then(response => {
                         
                         this.isliked = response.data.data; // Assuming your data is nested under 'data' key

@@ -70,6 +70,13 @@ class MessageController extends Controller
         $messages1 = auth()->user()->sent->where('receiver_id', $data['user_id']);
         $messages2 = auth()->user()->received->where('sender_id', $data['user_id']);
         $messages = $messages1->concat($messages2);
+        foreach ($messages as $key => $value) {
+            if($key == 'image_path'){
+                if($value){
+                    unlink($value);
+                }
+            }
+        }
         $messages->each(function ($model) {
             $model->delete();
         });

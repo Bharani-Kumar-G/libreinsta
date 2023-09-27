@@ -1,13 +1,15 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\PostController;
-use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\ProfileImageController;
 use App\Http\Controllers\FollowsController;
 use App\Http\Controllers\LikePostController;
 use App\Http\Controllers\MessageController;
+use App\Http\Controllers\CommentController;
+use App\Http\Controllers\PostController;
+use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ProfileImageController;
 use App\Http\Controllers\SearchController;
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\LikeCommentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -57,6 +59,16 @@ Route::get('/post/edit/{post}', [PostController::class, 'edit'])->name('post.edi
 
 Route::get('/message/{user}', [MessageController::class, 'show']);
 
+Route::get('/likes_count/{post}', [PostController::class, 'getLikesCount']);
+
+Route::get('/isliked/{post}', [PostController::class, 'isLiked']);
+
+Route::get('/comment/likes_count/{comment}', [CommentController::class, 'getLikesCount']);
+
+Route::get('/comment/isliked/{comment}', [CommentController::class, 'isLiked']);
+
+Route::post('/post/comment', [CommentController::class, 'store'])->name('post.comment.store');
+
 Route::post('/message/store', [MessageController::class, 'store'])->name('message.store');
 
 Route::post('/post/store', [PostController::class, 'store'])->name('post.store');
@@ -68,3 +80,5 @@ Route::post('profile/update', [ProfileController::class, 'update'])->name('profi
 Route::post('profile/image/store', [ProfileImageController::class, 'store'])->name('profile.image.store');
 
 Route::post('post/delete',[PostController::class, 'delete'])->name('post.delete');
+
+Route::post('/comment/like/{comment}', [LikeCommentController::class, 'store']);
