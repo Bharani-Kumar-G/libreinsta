@@ -15,8 +15,10 @@ class PostController extends Controller
     }
 
     public function index(Post $post){
+        $likes = (auth()->check()) ? auth()->user()->liked->contains($post->id): false;
         $follows = (auth()->check()) ? auth()->user()->followings->contains($post->user->profile->id) : false;
-        return view('post.index')->with(['post'=>$post, 'follows'=>$follows]);
+        
+        return view('post.index')->with(['post'=>$post, 'follows'=>$follows, 'likes'=>$likes]);
     }
 
     public function edit(Post $post){

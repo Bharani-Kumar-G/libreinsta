@@ -6,3 +6,17 @@
 
 // Bootstrap
 @import 'bootstrap/scss/bootstrap';
+
+$bg-color: #f0f0f0;
+
+.fixed-bottom-div {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: $bg-color; // Use the variable for background color
+    box-shadow: 0px -5px 5px rgba(0, 0, 0, 0.2); // Optional: Add a shadow for separation
+}
+a{
+    text-decoration: none;
+}

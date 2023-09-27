@@ -5,6 +5,10 @@ use App\Http\Controllers\PostController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProfileImageController;
 use App\Http\Controllers\FollowsController;
+use App\Http\Controllers\LikePostController;
+use App\Http\Controllers\MessageController;
+use App\Http\Controllers\SearchController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -23,9 +27,11 @@ Route::get('/', function () {
 Auth::routes();
 
 
-
+Route::get('/search', [SearchController::class, 'search'])->name('search');
 
 Route::get('/profile', [ProfileController::class, 'profile'])->name('home');
+
+Route::get('/message', [MessageController::class, 'index']);
 
 Route::get('profile/edit', [ProfileController::class, 'edit'])->name('profile.edit');
 
@@ -39,11 +45,19 @@ Route::get('/followings/{user}', [FollowsController::class, 'index']);
 
 Route::get('/followers/{user}', [FollowsController::class, 'followers']);
 
+Route::post('/message/delete', [MessageController::class, 'delete']);
+
 Route::post('/follow/{profile}', [FollowsController::class, 'store']);
+
+Route::post('/like/{post}', [LikePostController::class, 'store']);
 
 Route::get('post/index/{post}', [PostController::class, 'index'])->name('post.index');
 
 Route::get('/post/edit/{post}', [PostController::class, 'edit'])->name('post.edit');
+
+Route::get('/message/{user}', [MessageController::class, 'show']);
+
+Route::post('/message/store', [MessageController::class, 'store'])->name('message.store');
 
 Route::post('/post/store', [PostController::class, 'store'])->name('post.store');
 

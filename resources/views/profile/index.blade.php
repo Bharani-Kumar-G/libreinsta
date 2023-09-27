@@ -7,6 +7,7 @@
             <div class="col-2"><a href="/profile/{{ $user->id }}"><img class="rounded-circle" style="width: 150px" src="{{ asset($user->profile->image ?? "storage/images/profile.png") }}" alt=""></a></div>
             <div class="col-4">
                 @if(auth()->user()->id !== $user->id)
+                <a href="/message/{{ $user->id }}"><button>Message</button></a>
                 <div style="float: right"><follow-button profile-id="{{ $user->profile->id }}" follows="{{ $follows }}"></follow-button></div>    
                 @endif
                 

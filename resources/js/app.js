@@ -21,6 +21,8 @@ app.component('image-cropper', ImageCropperComponent);
 import FollowButton from './components/FollowButton.vue';
 app.component('follow-button', FollowButton);
 
+import LikeButton from './components/LikeButton.vue';
+app.component('like-button', LikeButton);
 /**
  * The following block of code may be used to automatically register your
  * Vue components. It will recursively scan this directory for the Vue

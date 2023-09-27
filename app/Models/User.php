@@ -56,4 +56,18 @@ class User extends Authenticatable
     public function followings(){
         return $this->belongsToMany(Profile::class);
     }
+
+    public function liked(){
+        return $this->belongsToMany(Post::class);
+    }
+
+    public function sent()
+    {
+        return $this->hasMany(Message::class,'sender_id', 'id');
+    }
+
+    public function received()
+    {
+        return $this->hasMany(Message::class,'receiver_id','id');
+    }
 }

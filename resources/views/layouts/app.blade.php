@@ -12,6 +12,7 @@
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
     <!-- Scripts -->
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
@@ -30,7 +31,19 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav me-auto">
-
+                        @auth
+                            <li class="nav-item ms-3">
+                                <a class="nav-link" href="/message"><i class="fa-solid fa-message" style="color: #9141ac;"></i></a>
+                            </li>
+                        @endauth
+                        @auth
+                        <li class="nav-item ms-3">
+                            <form method="GET" action="{{ route('search') }}">
+                                <input type="text" name="search" placeholder="Search...">
+                                <button type="submit"><i class="fa-solid fa-magnifying-glass" style="color: #9141ac;">Search</i></button>
+                            </form>                            
+                        </li>
+                        @endauth
                     </ul>
 
                     <!-- Right Side Of Navbar -->
